@@ -17,10 +17,10 @@ parser = argparse.ArgumentParser(description='Short sample app')
 
 
 parser.add_argument('-t', dest="title", action="store", default=TITLE, help="Sets title")
-parser.add_argument('-f', dest="font", action="store", default="\033[01;38;5;15m", help="Sets font color")
-parser.add_argument('-b', dest="barcolor", action="store", default="\033[48;5;196m", help="Sets bar color")
+parser.add_argument('-f', dest="font", action="store", default="7", help="Sets font color")
+parser.add_argument('-b', dest="barcolor", action="store", default="1", help="Sets bar color")
 
 args = parser.parse_args()
 
 
-print("\033c" + args.barcolor + " " * COLS + "\r\033[" + str(int((COLS - len(args.title))/2)) + "C" + args.font  + args.title + "\033[m\n")
+print("\033c\033[4" + str(args.barcolor) + "m" + " " * COLS + "\r\033[" + str(int((COLS - len(args.title))/2)) + "C\033[01;3" + str(args.font) + "m" + args.title + "\033[m\n")
