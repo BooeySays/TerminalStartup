@@ -1,3 +1,6 @@
+v0.1.4.5
+  -	Added default colors for Debian distro
+
 v0.1.4.4
   -	Added a couple of examples to the end of the colormap
   -	edited the help screen so that the version option is displayed last
