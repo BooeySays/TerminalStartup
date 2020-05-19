@@ -10,18 +10,18 @@ import shutil
 import os
 import argparse
 
-_VERSION_ = '0.1.4'		#	Current version number
+_VERSION_ = '0.1.4.1'		#	Current version number
 
 COLS, LINES = shutil.get_terminal_size()	#	Setting values for COLS and LINES
 
 TITLE = os.getenv("WSL_DISTRO_NAME")		#	Setting value for TITLE to be the value of $WSL_DISTRO_NAME
 
-if "Ubuntu" in TITLE:	#	if the value of WSL_DISTRO_NAME has the word "Ubuntu" in it,
-	BGCOLOR = "202"		#	the dafault bg color will be 202 (orange).
-elif "kali" in TITLE:	#	If the value has the word "Kali" in it, the default bg color
-	BGCOLOR = "33"		#	will be '51' (cyan).
-else:					#	Otherwise, the default color will be
-	BGCOLOR = "196"		#	'196', red
+if "ubuntu" in str.lower(TITLE):	#	if the value of WSL_DISTRO_NAME has the word "Ubuntu" in it,
+	BGCOLOR = "202"					#	the dafault bg color will be 202 (orange).
+elif "kali" in str.lower(TITLE):	#	If the value has the word "Kali" in it, the default bg color
+	BGCOLOR = "33"					#	will be '51' (cyan).
+else:								#	Otherwise, the default color will be
+	BGCOLOR = "196"					#	'196', red
 
 #if "kali" in TITLE:
 #	FGCOLOR = "16"

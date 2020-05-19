@@ -1,3 +1,8 @@
+v0.1.4.1
+  -	To avoid any "case sensitivity" issues, I tweaked TITLE so that it is all
+	lowercase letters when the function is searching the string to see if it
+	contains "kali" or "ubuntu" in the name.
+
 v0.1.4
   -	Renamed startbar.py to "startbar"
   -	Modified the script's permission and made it an executable file
