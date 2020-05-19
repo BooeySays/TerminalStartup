@@ -9,8 +9,56 @@
 import shutil
 import os
 import argparse
+import sys
 
-_VERSION_ = '0.1.4.1'		#	Current version number
+_VERSION_ = '0.1.4.4'		#	Current version number
+
+
+initcount = 0
+
+def cmap():
+	print('[00;01mBasic Colors: [m')
+	initcount = 0
+	count = 7
+	while count >= 0:
+		print('[m' + str(initcount).zfill(2) + ':[38;5;16;4;48;5;' + str(initcount) + 'm  [m ',end='')
+		initcount += 1
+		count -= 1
+	print('')
+	count = 7
+	while count >= 0:
+		print('[m' + str(initcount).zfill(2) + ':[38;5;16;4;48;5;' + str(initcount) + 'm  [m ',end='')
+		initcount += 1
+		count -= 1
+	print('')
+	print('')
+	print('[00;01mAdvanced colors: [m')
+	initcount = 16
+	while initcount < 232:
+		countb = 6
+		while countb > 0:
+			count = 6
+			while count > 0:
+				print('[m' + str(initcount).zfill(3) + ':[38;5;16;4;48;5;' + str(initcount) + 'm   [m ',end='')
+				initcount += 1
+				count -= 1
+			countb -= 1
+			print('')
+		print('')
+	print('[00;01mShades of grey: [m')
+	while initcount < 256:
+		count = 6
+		while count > 0:
+			print('[m   ' + '[' + str(len(str(initcount))) + 'D' + str(initcount) + ':[38;5;16;4;48;5;' + str(initcount) + 'm   [m ',end='')
+			initcount += 1
+			count -= 1
+		print('')
+	print("\nExamples:")
+	print("startbar -b \"21\":")
+	print("\tSets background color to \033[48;5;21m BLUE \033[m.")
+	print("\nstartbar -f \"46\":")
+	print("\tSets font color to \033[38;5;46mGREEN\033[m.")
+
 
 COLS, LINES = shutil.get_terminal_size()	#	Setting values for COLS and LINES
 
@@ -29,15 +77,22 @@ else:								#	Otherwise, the default color will be
 #	FGCOLOR = "15"
 FGCOLOR = "15"
 
-parser = argparse.ArgumentParser(description='Short sample app')
+parser = argparse.ArgumentParser(description=("BOOEY'S STARTBAR SCRIPT v" + str(_VERSION_)))
 
 
 parser.add_argument('-t', dest="title", action="store", default=TITLE, help="Sets title")
-parser.add_argument('-f', dest="font", action="store", default=FGCOLOR, help="Sets font color")
-parser.add_argument('-b', dest="barcolor", action="store", default=BGCOLOR, help="Sets bar color")
+parser.add_argument('-f', dest="fontcolor", action="store", default=FGCOLOR, help="Replace FONTCOLOR with a color code of your choosing to set font color to the color code entered.")
+parser.add_argument('-b', dest="barcolor", action="store", default=BGCOLOR, help="Replace BARCOLOR with a color code of your choosing to set the background color to the color code entered.")
+parser.add_argument('-clr', '--colors', dest="colormap", action="store_true", default="False", help="Displays all available color codes")
+parser.add_argument('-v', '--version', dest="version", action="store_true", default="False", help="Displays version number")
 
 args = parser.parse_args()
 
 BGCOLOR = str(args.barcolor)
 
-print("\033c\033[48;5;" + BGCOLOR + "m" + " " * COLS + "\r\033[" + str(int((COLS - len(args.title))/2)) + "C\033[38;5;" + args.font + "m" + args.title + "\033[m\n")
+if args.version is True:
+	print("BOOEY'S STARTBAR SCRIPT v" + str(_VERSION_))
+elif args.colormap is True:
+	cmap()
+else:
+	print("\033c\033[48;5;" + BGCOLOR + "m" + " " * COLS + "\r\033[" + str(int((COLS - len(args.title))/2)) + "C\033[38;5;" + args.fontcolor + "m" + args.title + "\033[m\n")
