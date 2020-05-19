@@ -1,3 +1,8 @@
+v0.1.4.6
+  -	Added "random" color option for both BGCOLOR and FGCOLOR.
+	  -	if user chooses "random" instead of a specific color code, the script
+		will pick a random number anywhere between 0 - 232
+
 v0.1.4.5
   -	Added default colors for Debian distro
 

@@ -10,8 +10,9 @@ import shutil
 import os
 import argparse
 import sys
+import random
 
-_VERSION_ = '0.1.4.5'		#	Current version number
+_VERSION_ = '0.1.4.6'		#	Current version number
 
 
 initcount = 0
@@ -92,9 +93,17 @@ args = parser.parse_args()
 
 BGCOLOR = str(args.barcolor)
 
+FGCOLOR = str(args.fontcolor)
+
+if BGCOLOR == "random":
+	BGCOLOR = str(random.randint(0,232))
+
+if FGCOLOR == "random":
+	FGCOLOR = str(random.randint(0,232))
+
 if args.version is True:
 	print("BOOEY'S STARTBAR SCRIPT v" + str(_VERSION_))
 elif args.colormap is True:
 	cmap()
 else:
-	print("\033c\033[48;5;" + BGCOLOR + "m" + " " * COLS + "\r\033[" + str(int((COLS - len(args.title))/2)) + "C\033[38;5;" + args.fontcolor + "m" + args.title + "\033[m\n")
+	print("\033c\033[48;5;" + BGCOLOR + "m" + " " * COLS + "\r\033[" + str(int((COLS - len(args.title))/2)) + "C\033[38;5;" + FGCOLOR + "m" + args.title + "\033[m\n")
