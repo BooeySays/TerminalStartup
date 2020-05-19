@@ -9,19 +9,30 @@
 import shutil
 import os
 import argparse
-_VERSION_ = '0.1.3'
-COLS, LINES = shutil.get_terminal_size()
-TITLE = os.getenv("WSL_DISTRO_NAME")
+
+_VERSION_ = '0.1.3'		#	Current version number
+
+COLS, LINES = shutil.get_terminal_size()	#	Setting values for COLS and LINES
+
+TITLE = os.getenv("WSL_DISTRO_NAME")		#	Setting value for TITLE to be the value of $WSL_DISTRO_NAME
+
+if "Ubuntu" in TITLE:	#	if the value of WSL_DISTRO_NAME has the word "Ubuntu" in it,
+	BGCOLOR = "202"		#	the dafault bg color will be 202 (orange).
+elif "Kali" in TITLE:	#	If the value has the word "Kali" in it, the default bg color
+	BGCOLOR = "51"		#	will be '51' (cyan).
+else:					#	Otherwise, the default color will be
+	BGCOLOR = "196"		#	'196', red
 
 
 parser = argparse.ArgumentParser(description='Short sample app')
 
 
 parser.add_argument('-t', dest="title", action="store", default=TITLE, help="Sets title")
-parser.add_argument('-f', dest="font", action="store", default="\033[01;38;5;15m", help="Sets font color")
-parser.add_argument('-b', dest="barcolor", action="store", default="\033[48;5;202m", help="Sets bar color")
+parser.add_argument('-f', dest="font", action="store", default="15", help="Sets font color")
+parser.add_argument('-b', dest="barcolor", action="store", default=BGCOLOR, help="Sets bar color")
 
 args = parser.parse_args()
 
+BGCOLOR = str(args.barcolor)
 
-print("\033c" + args.barcolor + " " * COLS + "\r\033[" + str(int((COLS - len(args.title))/2)) + "C" + args.font  + args.title + "\033[m\n")
+print("\033c\033[48;5;" + BGCOLOR + "m" + " " * COLS + "\r\033[" + str(int((COLS - len(args.title))/2)) + "C\033[38;5;" + args.font + "m" + args.title + "\033[m\n")

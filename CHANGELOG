@@ -1,3 +1,11 @@
+v0.1.3
+  -	Changed default BG color to 196 if the distro is neither Ubuntu or Kali
+	  -	If Kali, the default BG color will be 51 (cyan - Kali's color scheme)
+	  -	if Ubuntu, the default BG color will be 202 (orange - Ubuntu's color scheme)
+	  -	If the '-b' option is used, the BG color will be over written with the option
+		used.
+
+
 v0.1.2
   -	Changed default BG color to 202
 
