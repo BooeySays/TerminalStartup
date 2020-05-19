@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+
+"""
+	Python script for use with Window's Linux installs that displays
+	a bar at the top of the terminal, displaying the distro's name.
+"""
+
+
+import shutil
+import os
+import argparse
+
+_VERSION_ = '0.1.4'		#	Current version number
+
+COLS, LINES = shutil.get_terminal_size()	#	Setting values for COLS and LINES
+
+TITLE = os.getenv("WSL_DISTRO_NAME")		#	Setting value for TITLE to be the value of $WSL_DISTRO_NAME
+
+if "Ubuntu" in TITLE:	#	if the value of WSL_DISTRO_NAME has the word "Ubuntu" in it,
+	BGCOLOR = "202"		#	the dafault bg color will be 202 (orange).
+elif "kali" in TITLE:	#	If the value has the word "Kali" in it, the default bg color
+	BGCOLOR = "33"		#	will be '51' (cyan).
+else:					#	Otherwise, the default color will be
+	BGCOLOR = "196"		#	'196', red
+
+#if "kali" in TITLE:
+#	FGCOLOR = "16"
+#else:
+#	FGCOLOR = "15"
+FGCOLOR = "15"
+
+parser = argparse.ArgumentParser(description='Short sample app')
+
+
+parser.add_argument('-t', dest="title", action="store", default=TITLE, help="Sets title")
+parser.add_argument('-f', dest="font", action="store", default=FGCOLOR, help="Sets font color")
+parser.add_argument('-b', dest="barcolor", action="store", default=BGCOLOR, help="Sets bar color")
+
+args = parser.parse_args()
+
+BGCOLOR = str(args.barcolor)
+
+print("\033c\033[48;5;" + BGCOLOR + "m" + " " * COLS + "\r\033[" + str(int((COLS - len(args.title))/2)) + "C\033[38;5;" + args.font + "m" + args.title + "\033[m\n")
