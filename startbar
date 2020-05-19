@@ -84,8 +84,8 @@ parser = argparse.ArgumentParser(description=("BOOEY'S STARTBAR SCRIPT v" + str(
 
 
 parser.add_argument('-t', dest="title", action="store", default=TITLE, help="Sets title")
-parser.add_argument('-f', dest="fontcolor", action="store", default=FGCOLOR, help="Replace FONTCOLOR with a color code of your choosing to set font color to the color code entered.")
-parser.add_argument('-b', dest="barcolor", action="store", default=BGCOLOR, help="Replace BARCOLOR with a color code of your choosing to set the background color to the color code entered.")
+parser.add_argument('-f', dest="fontcolor", action="store", default=FGCOLOR, help="Replace FONTCOLOR with a color code of your choosing to set font color to the color code entered. To choose a random color, use \"random\" instead of a color code.")
+parser.add_argument('-b', dest="barcolor", action="store", default=BGCOLOR, help="Replace BARCOLOR with a color code of your choosing to set the background color to the color code entered. To choose a random color, use \"random\" instead of a color code.")
 parser.add_argument('-clr', '--colors', dest="colormap", action="store_true", default="False", help="Displays all available color codes")
 parser.add_argument('-v', '--version', dest="version", action="store_true", default="False", help="Displays version number")
 
@@ -106,4 +106,4 @@ if args.version is True:
 elif args.colormap is True:
 	cmap()
 else:
-	print("\033c\033[48;5;" + BGCOLOR + "m" + " " * COLS + "\r\033[" + str(int((COLS - len(args.title))/2)) + "C\033[38;5;" + FGCOLOR + "m" + args.title + "\033[m\n")
+	print("\033c\033[48;5;" + BGCOLOR + "m" + " " * COLS + "\r\033[" + str(int((COLS - len(args.title))/2)) + "C\033[38;5;" + FGCOLOR + "m" + args.title + "\033[m")
