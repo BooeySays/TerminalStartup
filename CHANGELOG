@@ -1,3 +1,7 @@
+v0.1.5
+  - Added another argument (-r / --random), which when used, will randomize the
+	coloring for both background and text
+
 v0.1.4.6
   -	Added "random" color option for both BGCOLOR and FGCOLOR.
 	  -	if user chooses "random" instead of a specific color code, the script

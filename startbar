@@ -12,7 +12,7 @@ import argparse
 import sys
 import random
 
-_VERSION_ = '0.1.4.6'		#	Current version number
+_VERSION_ = '0.1.5'		#	Current version number
 
 
 initcount = 0
@@ -63,7 +63,13 @@ def cmap():
 
 COLS, LINES = shutil.get_terminal_size()	#	Setting values for COLS and LINES
 
-TITLE = os.getenv("WSL_DISTRO_NAME")		#	Setting value for TITLE to be the value of $WSL_DISTRO_NAME
+if os.getenv("WSL_DISTRO_NAME") is None:
+	if os.getenv("SHELL") is None:
+		TITLE = "Distro info: N/A"
+	else:
+		TITLE = os.getenv("SHELL")
+else:
+	TITLE = os.getenv("WSL_DISTRO_NAME")		#	Setting value for TITLE to be the value of $WSL_DISTRO_NAME
 
 if "ubuntu" in str.lower(TITLE):	#	if the value of WSL_DISTRO_NAME has the word "Ubuntu" in it,
 	BGCOLOR = "202"					#	the dafault bg color will be 202 (orange).
@@ -86,6 +92,7 @@ parser = argparse.ArgumentParser(description=("BOOEY'S STARTBAR SCRIPT v" + str(
 parser.add_argument('-t', dest="title", action="store", default=TITLE, help="Sets title")
 parser.add_argument('-f', dest="fontcolor", action="store", default=FGCOLOR, help="Replace FONTCOLOR with a color code of your choosing to set font color to the color code entered. To choose a random color, use \"random\" instead of a color code.")
 parser.add_argument('-b', dest="barcolor", action="store", default=BGCOLOR, help="Replace BARCOLOR with a color code of your choosing to set the background color to the color code entered. To choose a random color, use \"random\" instead of a color code.")
+parser.add_argument('-r', '--random', dest="random", action="store_true", default="False", help="Randomize the coloring for both background and text")
 parser.add_argument('-clr', '--colors', dest="colormap", action="store_true", default="False", help="Displays all available color codes")
 parser.add_argument('-v', '--version', dest="version", action="store_true", default="False", help="Displays version number")
 
@@ -99,6 +106,10 @@ if BGCOLOR == "random":
 	BGCOLOR = str(random.randint(0,232))
 
 if FGCOLOR == "random":
+	FGCOLOR = str(random.randint(0,232))
+
+if args.random is True:
+	BGCOLOR = str(random.randint(0,232))
 	FGCOLOR = str(random.randint(0,232))
 
 if args.version is True:
