@@ -11,8 +11,13 @@ import os
 import argparse
 import sys
 import random
+from datetime import date
 
-_VERSION_ = '0.1.5'		#	Current version number
+todaysdate = date.today()
+today2 = todaysdate.strftime("%m - %d - %Y")
+
+
+_VERSION_ = '0.1.5.1'		#	Current version number
 
 
 initcount = 0

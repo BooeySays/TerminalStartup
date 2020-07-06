@@ -1,3 +1,7 @@
+v0.1.5.1
+  -	Added datetime module
+	  -	working on added option to display current date
+
 v0.1.5
   - Added another argument (-r / --random), which when used, will randomize the
 	coloring for both background and text
