@@ -14,7 +14,7 @@ import random
 from datetime import date
 
 todaysdate = date.today()
-today2 = todaysdate.strftime("%m - %d - %Y")
+today2 = todaysdate.strftime("%c")
 
 
 _VERSION_ = '0.1.5.1'		#	Current version number
